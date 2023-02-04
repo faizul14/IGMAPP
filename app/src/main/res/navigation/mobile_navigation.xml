@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/navigation_list_gempa"
+        android:name="com.informasigempabumi.igmapp.ui.listGMP.ListgempaFragment"
+        android:label="@string/list_gempa"
+        tools:layout="@layout/fragment_listgempa" />
+
+    <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.informasigempabumi.igmapp.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
