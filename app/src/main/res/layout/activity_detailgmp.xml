@@ -6,23 +6,64 @@
     android:layout_height="match_parent"
     tools:context=".ui.detailGMP.DetailgmpActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:padding="10dp"
-        android:background="@color/bg_frame"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
-        <ImageView
-            android:layout_gravity="center"
-            android:layout_width="89dp"
-            android:layout_height="38dp"
-            android:src="@drawable/ic_gempa_white"/>
-    </androidx.appcompat.widget.Toolbar>
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/bg_frame"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="69dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_gempa_white" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:id="@+id/cardView2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="vertical"
+            android:background="@color/bg_frame"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <TextView
+                android:id="@+id/tv_detail_wilayah"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="287 km BaratDaya KAB-BLITAR-JATIM"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <com.mapbox.mapboxsdk.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2"
+            app:mapbox_cameraTargetLat="0"
+            app:mapbox_cameraTargetLng="118"
+            app:mapbox_cameraZoom="2.6"></com.mapbox.mapboxsdk.maps.MapView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
-        layout="@layout/bottom_sheet_detail_gempa"/>
+        android:id="@+id/icd_bottom_detail"
+        layout="@layout/bottom_sheet_detail_gempa" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
