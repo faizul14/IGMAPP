@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IGMAPP">
         <activity
+            android:name=".ui.detailGMP.DetailgmpActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
