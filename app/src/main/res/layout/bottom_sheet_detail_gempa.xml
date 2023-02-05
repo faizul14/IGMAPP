@@ -10,12 +10,12 @@
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="64dp"
-        android:layout_height="4dp"
+        android:layout_width="84dp"
+        android:layout_height="8dp"
         android:layout_gravity="center"
         android:layout_marginBottom="8dp"
         app:cardBackgroundColor="@color/bg_frame"
-        app:cardCornerRadius="8dp" />
+        app:cardCornerRadius="4dp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
