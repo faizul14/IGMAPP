@@ -21,12 +21,11 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
         val client = apiService.getGempaTerbaru()
         client.enqueue(object : Callback<GempaTerbaruResponse> {
             override fun onResponse(
-                call: Call<GempaTerbaruResponse>,
-                response: Response<GempaTerbaruResponse>
+                call: Call<GempaTerbaruResponse>, response: Response<GempaTerbaruResponse>
             ) {
                 val responseBody = response.body()
                 if (response.isSuccessful && responseBody != null) {
-                    resultData.value = response.body()!!.infogempa?.gempa
+                    resultData.value = response.body()!!.infogempa?.gempa!!
                 } else {
                     Log.d(TAG, "MESSAGE: ${response.message()}")
                 }
@@ -46,8 +45,7 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
         val client = apiService.getGempaTerkini()
         client.enqueue(object : Callback<GempaTerkiniResponse> {
             override fun onResponse(
-                call: Call<GempaTerkiniResponse>,
-                response: Response<GempaTerkiniResponse>
+                call: Call<GempaTerkiniResponse>, response: Response<GempaTerkiniResponse>
             ) {
                 val responseBody = response.body()
                 if (response.isSuccessful && responseBody != null) {
@@ -71,8 +69,7 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
         val client = apiService.getGempaDiRasakan()
         client.enqueue(object : Callback<GempaDiRasakanResponse> {
             override fun onResponse(
-                call: Call<GempaDiRasakanResponse>,
-                response: Response<GempaDiRasakanResponse>
+                call: Call<GempaDiRasakanResponse>, response: Response<GempaDiRasakanResponse>
             ) {
                 val responseBody = response.body()
                 if (response.isSuccessful && responseBody != null) {
@@ -96,10 +93,9 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
         @Volatile
         private var INSTANCE: RemoteDataSource? = null
 
-        fun getInstance(service: ApiService): RemoteDataSource =
-            INSTANCE ?: synchronized(this) {
-                INSTANCE ?: RemoteDataSource(service)
-            }
+        fun getInstance(service: ApiService): RemoteDataSource = INSTANCE ?: synchronized(this) {
+            INSTANCE ?: RemoteDataSource(service)
+        }
     }
 
 }

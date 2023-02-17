@@ -4,6 +4,8 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.informasigempabumi.igmapp.R
+import com.informasigempabumi.igmapp.core.domain.model.DataGempa
+import com.informasigempabumi.igmapp.core.utils.ParsingDataCoordinateToLatLong
 import com.informasigempabumi.igmapp.databinding.ActivityDetailgmpBinding
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
@@ -18,11 +20,16 @@ class DetailgmpActivity : AppCompatActivity() {
     private lateinit var mapView: MapView
     private lateinit var mapboxMap: MapboxMap
     private lateinit var symbolManager: SymbolManager
+    private lateinit var dataGempa: DataGempa
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailgmpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
+
+        dataGempa = intent.getParcelableExtra<DataGempa>(EXTRA_DATA) as DataGempa
+        binding.tvDetailWilayah.setText(dataGempa.wilayah)
+
 
         mapView = findViewById(R.id.mapView)
 
@@ -33,26 +40,27 @@ class DetailgmpActivity : AppCompatActivity() {
                 symbolManager = SymbolManager(mapView, mapboxMap, style)
                 symbolManager.iconAllowOverlap = true
 
-//                style.addImage(
-//                    ID, BitmapFactory.decodeResource(resources, R.drawable.marker_test)
-//                )
+                style.addImage(
+                    ID, BitmapFactory.decodeResource(resources, R.drawable.ic_gempa_marker)
+                )
 
-                showMarker()
+                dataGempa.coordinates?.let { showMarker(it) }
             }
         }
 
     }
 
-    private fun showMarker() {
-        val latLong = LatLng(-6.8957643, 107.6338462)
+    private fun showMarker(location: String) {
+//        val latLong = LatLng(-6.8957643, 107.6338462)
+        val latLong = LatLng(ParsingDataCoordinateToLatLong.parsing(location))
         symbolManager.create(
             SymbolOptions().withLatLng(LatLng(latLong.latitude, latLong.longitude))
                 .withIconImage(ID).withIconSize(1.5f).withIconOffset(arrayOf(0f, -1.5f))
-                .withTextField("Location Space").withTextHaloColor("rgba(255, 255, 255, 100)")
-                .withTextHaloWidth(5.0f).withTextAnchor("top").withTextOffset(arrayOf(0f, 1.5f))
-                .withDraggable(true)
+//                .withTextField("Location Space").withTextHaloColor("rgba(255, 255, 255, 100)")
+//                .withTextHaloWidth(5.0f).withTextAnchor("bottom").withTextOffset(arrayOf(0f, 1.5f))
+                .withDraggable(false)
         )
-        mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLong, 8.0))
+        mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLong, 10.0))
 
     }
 
@@ -93,6 +101,7 @@ class DetailgmpActivity : AppCompatActivity() {
 
     companion object {
         const val ID = "CONST_ID"
+        const val EXTRA_DATA = "extra_data"
     }
 
 }

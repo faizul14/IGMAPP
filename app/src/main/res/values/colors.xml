@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bg_frame">#E74445</color>
     <color name="color_bottom_sheet">#F2F2F2</color>
+    <color name="green">#45FF00</color>
+    <color name="yelow">#FFB600</color>
+    <color name="read">#FF0000</color>
 </resources>

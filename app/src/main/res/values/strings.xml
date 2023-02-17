@@ -11,4 +11,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sample_magnitudo">2.6 SR</string>
     <string name="key_mapbox">sk.eyJ1IjoibmVhcmJ5ZG9jIiwiYSI6ImNsM3N3dmw4eDAzYTEzanFxODF1MnZ1cnAifQ.LvoNzo_pvDd7DhfGZFCpDg</string>
+    <string name="sample_list_wilayah">150 km Barat KAB-BLITAR-JABAR</string>
+    <string name="jam_yang_lalu_sample">9 jam yang lalu</string>
+    <string name="jam_sample">06:05:05 WIB</string>
 </resources>
