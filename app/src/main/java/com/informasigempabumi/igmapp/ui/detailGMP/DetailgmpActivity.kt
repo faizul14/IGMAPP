@@ -2,11 +2,11 @@ package com.informasigempabumi.igmapp.ui.detailGMP
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.informasigempabumi.igmapp.R
 import com.informasigempabumi.igmapp.core.domain.model.DataGempa
+import com.informasigempabumi.igmapp.core.utils.FormatStyleWilayah
 import com.informasigempabumi.igmapp.core.utils.ParsingDataCoordinateToLatLong
 import com.informasigempabumi.igmapp.databinding.ActivityDetailgmpBinding
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
@@ -23,6 +23,7 @@ class DetailgmpActivity : AppCompatActivity() {
     private lateinit var mapboxMap: MapboxMap
     private lateinit var symbolManager: SymbolManager
     private lateinit var dataGempa: DataGempa
+    private var dataTerkiniOrDirasakan: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailgmpBinding.inflate(layoutInflater)
@@ -30,7 +31,7 @@ class DetailgmpActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         dataGempa = intent.getParcelableExtra<DataGempa>(EXTRA_DATA) as DataGempa
-        binding.tvDetailWilayah.setText(dataGempa.wilayah)
+        dataTerkiniOrDirasakan = intent.getStringExtra(ID_TERKIN_OR_DIRASAKAN)
         binding.btnBack.setOnClickListener {
             super.onBackPressed()
         }
@@ -41,10 +42,10 @@ class DetailgmpActivity : AppCompatActivity() {
 
     }
 
-    private fun display(){
+    private fun display() {
         val dataMag = dataGempa.magnitude?.toDouble()
         binding.icdBottomDetail.apply {
-            when(dataMag!!){
+            when (dataMag!!) {
                 in 0.0..4.9 -> {
                     materialCardView.setBackgroundDrawable(
                         ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_green)
@@ -61,11 +62,27 @@ class DetailgmpActivity : AppCompatActivity() {
                     )
                 }
             }
-            tvDetailPotensi.setText(dataGempa.potensi)
-            tvDetailMagnitudo.setText("$dataMag SR")
-            tvDetailWaktu.setText("${dataGempa.tanggal}\n${dataGempa.jam}")
-            tvDetailKedalaman.setText(dataGempa.kedalaman)
-            tvDetailLatlong.setText(dataGempa.coordinates)
+            when (dataTerkiniOrDirasakan) {
+                "1" -> {
+                    tvTittlePotensiOrDirasakan.text = "Dirasakan"
+                    tvDetailPotensi.text = dataGempa.dirasakan
+                    binding.tvDetailWilayah.text = dataGempa.wilayah
+
+                }
+                else -> {
+                    tvDetailPotensi.text = dataGempa.potensi
+                    binding.tvDetailWilayah.text = dataGempa.wilayah?.let {
+                        FormatStyleWilayah.getLastWordInNewLine(
+                            it
+                        )
+                    }
+
+                }
+            }
+            tvDetailMagnitudo.text = "$dataMag SR"
+            tvDetailWaktu.text = "${dataGempa.tanggal}\n${dataGempa.jam}"
+            tvDetailKedalaman.text = dataGempa.kedalaman
+            tvDetailLatlong.text = dataGempa.coordinates
         }
 
         //set mapbox
@@ -137,6 +154,7 @@ class DetailgmpActivity : AppCompatActivity() {
     companion object {
         const val ID = "CONST_ID"
         const val EXTRA_DATA = "extra_data"
+        const val ID_TERKIN_OR_DIRASAKAN = "data"
     }
 
 }

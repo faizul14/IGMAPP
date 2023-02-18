@@ -48,8 +48,6 @@ class HomeFragment : Fragment() {
         homeViewModel.getGempaLive().observe(requireActivity()) { data ->
             display(data)
         }
-        homeViewModel.text.observe(viewLifecycleOwner) {
-        }
         return root
     }
 

@@ -61,6 +61,7 @@ class ListTerkiniAdapter : RecyclerView.Adapter<ListTerkiniAdapter.ViewHolder>()
             itemView.setOnClickListener {
                 val move = Intent(itemView.context, DetailgmpActivity::class.java)
                 move.putExtra(DetailgmpActivity.EXTRA_DATA, data)
+                move.putExtra(DetailgmpActivity.ID_TERKIN_OR_DIRASAKAN, "0")
                 itemView.context.startActivity(move)
             }
         }

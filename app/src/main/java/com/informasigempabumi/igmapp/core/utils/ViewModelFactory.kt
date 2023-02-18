@@ -25,7 +25,7 @@ class ViewModelFactory private constructor(private val useCase: UseCase) :
         if (modelClass.isAssignableFrom(ListTerkiniViewModel::class.java)) {
             return ListTerkiniViewModel(useCase) as T
         }
-        if (modelClass.isAssignableFrom(ListTerkiniViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(ListDirasakanViewModel::class.java)) {
             return ListDirasakanViewModel(useCase) as T
         }
         if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {

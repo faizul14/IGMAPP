@@ -1,21 +1,80 @@
 package com.informasigempabumi.igmapp.core.ui
 
-import android.view.View
+import android.content.Intent
+import android.os.Build
+import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.informasigempabumi.igmapp.R
+import com.informasigempabumi.igmapp.core.domain.model.DataGempa
+import com.informasigempabumi.igmapp.core.utils.FormatTImeAgo
+import com.informasigempabumi.igmapp.databinding.ItemDirasakanBinding
+import com.informasigempabumi.igmapp.ui.detailGMP.DetailgmpActivity
 
 class ListDirasakanAdapter : RecyclerView.Adapter<ListDirasakanAdapter.ViewHolder>() {
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    private val listDataGempa = ArrayList<DataGempa>()
+    fun setDataGempaTerkini(data: List<DataGempa>) {
+        listDataGempa.clear()
+        listDataGempa.addAll(data)
+        notifyDataSetChanged()
+    }
+
+    class ViewHolder(val binding: ItemDirasakanBinding) : RecyclerView.ViewHolder(binding.root) {
+        @RequiresApi(Build.VERSION_CODES.O)
+        fun bind(data: DataGempa) {
+            val magnitudo = data.magnitude!!.toDouble()
+            binding.tvListWilayah.text = data.wilayah
+            binding.tvListMagnitudo.text = data.magnitude
+            binding.tvListTgl.text = data.tanggal
+            binding.tvListJamYanglalu.text = data.dateTime?.let { FormatTImeAgo.getTimeAgo(it) }
+            if (data.magnitude != null) {
+                when (magnitudo) {
+                    in 0.0..4.9 -> {
+                        binding.materialCardView.setBackgroundDrawable(
+                            ContextCompat.getDrawable(
+                                binding.root.context,
+                                R.drawable.bg_circle_green
+                            )
+                        )
+                    }
+                    in 5.0..6.0 -> {
+                        binding.materialCardView.setBackgroundDrawable(
+                            ContextCompat.getDrawable(
+                                binding.root.context,
+                                R.drawable.bg_circle_yellow
+                            )
+                        )
+                    }
+                    else -> {
+                        binding.materialCardView.setBackgroundDrawable(
+                            ContextCompat.getDrawable(
+                                binding.root.context,
+                                R.drawable.bg_circle_red
+                            )
+                        )
+                    }
+                }
+            }
+            itemView.setOnClickListener {
+                val move = Intent(itemView.context, DetailgmpActivity::class.java)
+                move.putExtra(DetailgmpActivity.EXTRA_DATA, data)
+                move.putExtra(DetailgmpActivity.ID_TERKIN_OR_DIRASAKAN, "1")
+                itemView.context.startActivity(move)
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+        val view = ItemDirasakanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount(): Int = listDataGempa.size
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(listDataGempa[position])
     }
 }

@@ -47,12 +47,14 @@
 
             <TextView
                 android:id="@+id/tv_detail_wilayah"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:text="287 km BaratDaya KAB-BLITAR-JATIM"
                 android:layout_gravity="center"
                 android:textColor="@color/white"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:textSize="14sp"/>
         </LinearLayout>
 

@@ -40,14 +40,13 @@ class ListTerkiniFragment : Fragment() {
                 adapter = ListTerkiniAdapter()
                 adapter.setDataGempaTerkini(data)
                 binding.rvTerkini.adapter = adapter
+                binding.shimerBaar.visibility = View.GONE
+                binding.rvTerkini.visibility = View.VISIBLE
             }
         }
 
     }
 
-    private fun listDisplay() {
-
-    }
 
     override fun onDestroy() {
         super.onDestroy()
