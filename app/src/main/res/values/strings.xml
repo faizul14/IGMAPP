@@ -14,4 +14,8 @@
     <string name="sample_list_wilayah">150 km Barat KAB-BLITAR-JABAR</string>
     <string name="jam_yang_lalu_sample">9 jam yang lalu</string>
     <string name="jam_sample">06:05:05 WIB</string>
+    <string name="sample_dirasakan">II Pulau Kalaotoa, II Pulau Madu</string>
+    <string name="sample_pusat">Pusat gempa berada di laut 128 km BaratLaut Maumere-Sikka</string>
+    <string name="sample_kedalaman">13 km</string>
+    <string name="sample_potensi">Gempa ini dirasakan untuk diteruskan pada masyarakat</string>
 </resources>

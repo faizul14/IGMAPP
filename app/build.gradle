@@ -59,5 +59,4 @@ dependencies {
     implementation 'com.mapbox.mapboxsdk:mapbox-android-telemetry:6.1.0'
     //viewPager
     implementation "androidx.viewpager2:viewpager2:1.0.0"
-
 }

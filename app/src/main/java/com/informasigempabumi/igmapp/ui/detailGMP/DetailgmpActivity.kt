@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.informasigempabumi.igmapp.R
 import com.informasigempabumi.igmapp.core.domain.model.DataGempa
 import com.informasigempabumi.igmapp.core.utils.ParsingDataCoordinateToLatLong
@@ -33,11 +34,41 @@ class DetailgmpActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             super.onBackPressed()
         }
-
-
         mapView = findViewById(R.id.mapView)
-
         mapView.onCreate(savedInstanceState)
+        display()
+
+
+    }
+
+    private fun display(){
+        val dataMag = dataGempa.magnitude?.toDouble()
+        binding.icdBottomDetail.apply {
+            when(dataMag!!){
+                in 0.0..4.9 -> {
+                    materialCardView.setBackgroundDrawable(
+                        ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_green)
+                    )
+                }
+                in 5.0..6.0 -> {
+                    materialCardView.setBackgroundDrawable(
+                        ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_yellow)
+                    )
+                }
+                else -> {
+                    materialCardView.setBackgroundDrawable(
+                        ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_red)
+                    )
+                }
+            }
+            tvDetailPotensi.setText(dataGempa.potensi)
+            tvDetailMagnitudo.setText("$dataMag SR")
+            tvDetailWaktu.setText("${dataGempa.tanggal}\n${dataGempa.jam}")
+            tvDetailKedalaman.setText(dataGempa.kedalaman)
+            tvDetailLatlong.setText(dataGempa.coordinates)
+        }
+
+        //set mapbox
         mapView.getMapAsync { mapboxMap ->
             this.mapboxMap = mapboxMap
             mapboxMap.setStyle(Style.MAPBOX_STREETS) { style ->
@@ -51,7 +82,6 @@ class DetailgmpActivity : AppCompatActivity() {
                 dataGempa.coordinates?.let { showMarker(it) }
             }
         }
-
     }
 
     private fun showMarker(location: String) {
