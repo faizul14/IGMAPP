@@ -27,18 +27,18 @@ class ListTerkiniAdapter : RecyclerView.Adapter<ListTerkiniAdapter.ViewHolder>()
             if (data.magnitude != null) {
                 when (magnitudo) {
                     in 0.0..4.9 -> {
-                        binding.materialCardView.setBackgroundColor(
-                            ContextCompat.getColor(binding.root.context, R.color.green)
+                        binding.materialCardView.setBackgroundDrawable(
+                            ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_green)
                         )
                     }
-                    in 5.0..6.9 -> {
-                        binding.materialCardView.setBackgroundColor(
-                            ContextCompat.getColor(binding.root.context, R.color.yelow)
+                    in 5.0..6.0 -> {
+                        binding.materialCardView.setBackgroundDrawable(
+                            ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_yellow)
                         )
                     }
                     else -> {
-                        binding.materialCardView.setBackgroundColor(
-                            ContextCompat.getColor(binding.root.context, R.color.read)
+                        binding.materialCardView.setBackgroundDrawable(
+                            ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_red)
                         )
                     }
                 }

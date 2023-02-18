@@ -2,6 +2,7 @@ package com.informasigempabumi.igmapp.ui.detailGMP
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.informasigempabumi.igmapp.R
 import com.informasigempabumi.igmapp.core.domain.model.DataGempa
@@ -29,6 +30,9 @@ class DetailgmpActivity : AppCompatActivity() {
 
         dataGempa = intent.getParcelableExtra<DataGempa>(EXTRA_DATA) as DataGempa
         binding.tvDetailWilayah.setText(dataGempa.wilayah)
+        binding.btnBack.setOnClickListener {
+            super.onBackPressed()
+        }
 
 
         mapView = findViewById(R.id.mapView)
@@ -55,12 +59,13 @@ class DetailgmpActivity : AppCompatActivity() {
         val latLong = LatLng(ParsingDataCoordinateToLatLong.parsing(location))
         symbolManager.create(
             SymbolOptions().withLatLng(LatLng(latLong.latitude, latLong.longitude))
-                .withIconImage(ID).withIconSize(1.5f).withIconOffset(arrayOf(0f, -1.5f))
-//                .withTextField("Location Space").withTextHaloColor("rgba(255, 255, 255, 100)")
-//                .withTextHaloWidth(5.0f).withTextAnchor("bottom").withTextOffset(arrayOf(0f, 1.5f))
+                .withIconImage(ID).withIconSize(1.0f).withIconOffset(arrayOf(0f, -1.5f))
+                .withTextField("Location $location").withTextHaloColor("rgba(255, 255, 255, 100)")
+                .withTextHaloWidth(5.0f).withTextAnchor("top").withTextOffset(arrayOf(0f, 2.5f))
                 .withDraggable(false)
+
         )
-        mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLong, 10.0))
+        mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLong, 8.0))
 
     }
 
