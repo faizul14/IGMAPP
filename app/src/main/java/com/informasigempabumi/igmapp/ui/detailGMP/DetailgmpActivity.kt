@@ -1,6 +1,8 @@
 package com.informasigempabumi.igmapp.ui.detailGMP
 
+import android.content.Intent
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -8,6 +10,7 @@ import com.informasigempabumi.igmapp.R
 import com.informasigempabumi.igmapp.core.domain.model.DataGempa
 import com.informasigempabumi.igmapp.core.utils.FormatStyleWilayah
 import com.informasigempabumi.igmapp.core.utils.ParsingDataCoordinateToLatLong
+import com.informasigempabumi.igmapp.core.utils.Resultmagnitudeimpact
 import com.informasigempabumi.igmapp.databinding.ActivityDetailgmpBinding
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
@@ -32,12 +35,10 @@ class DetailgmpActivity : AppCompatActivity() {
 
         dataGempa = intent.getParcelableExtra<DataGempa>(EXTRA_DATA) as DataGempa
         dataTerkiniOrDirasakan = intent.getStringExtra(ID_TERKIN_OR_DIRASAKAN)
-        binding.btnBack.setOnClickListener {
-            super.onBackPressed()
-        }
         mapView = findViewById(R.id.mapView)
         mapView.onCreate(savedInstanceState)
         display()
+        btnClick()
 
 
     }
@@ -50,15 +51,30 @@ class DetailgmpActivity : AppCompatActivity() {
                     materialCardView.setBackgroundDrawable(
                         ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_green)
                     )
+                    statusViewSide.setBackgroundColor(
+                        ContextCompat.getColor(
+                            binding.root.context, R.color.green
+                        )
+                    )
                 }
                 in 5.0..6.0 -> {
                     materialCardView.setBackgroundDrawable(
                         ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_yellow)
                     )
+                    statusViewSide.setBackgroundColor(
+                        ContextCompat.getColor(
+                            binding.root.context, R.color.yelow
+                        )
+                    )
                 }
                 else -> {
                     materialCardView.setBackgroundDrawable(
                         ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_red)
+                    )
+                    statusViewSide.setBackgroundColor(
+                        ContextCompat.getColor(
+                            binding.root.context, R.color.read
+                        )
                     )
                 }
             }
@@ -67,10 +83,12 @@ class DetailgmpActivity : AppCompatActivity() {
                     tvTittlePotensiOrDirasakan.text = "Dirasakan"
                     tvDetailPotensi.text = dataGempa.dirasakan
                     binding.tvDetailWilayah.text = dataGempa.wilayah
+                    binding.icdBottomDetail.tvSumber.text = resources.getString(R.string.sumber1)
 
                 }
                 else -> {
                     tvDetailPotensi.text = dataGempa.potensi
+                    binding.icdBottomDetail.tvSumber.text = resources.getString(R.string.sumber0)
                     binding.tvDetailWilayah.text = dataGempa.wilayah?.let {
                         FormatStyleWilayah.getLastWordInNewLine(
                             it
@@ -79,10 +97,13 @@ class DetailgmpActivity : AppCompatActivity() {
 
                 }
             }
+            tvDetailDampakMag.text =
+                Resultmagnitudeimpact.resultImpact(dataMag, this@DetailgmpActivity)
             tvDetailMagnitudo.text = "$dataMag SR"
-            tvDetailWaktu.text = "${dataGempa.tanggal}\n${dataGempa.jam}"
-            tvDetailKedalaman.text = dataGempa.kedalaman
-            tvDetailLatlong.text = dataGempa.coordinates
+            tvDetailMagnitudo2.text = "$dataMag SR"
+            tvDetailWaktu2.text = "${dataGempa.tanggal}\n${dataGempa.jam}"
+            tvDetailKedalaman2.text = dataGempa.kedalaman
+            tvDetailKordinat.text = dataGempa.coordinates
         }
 
         //set mapbox
@@ -101,6 +122,21 @@ class DetailgmpActivity : AppCompatActivity() {
         }
     }
 
+    private fun btnClick() {
+        binding.icdBottomDetail.lrSumber.setOnClickListener {
+            moveToWeb(binding.icdBottomDetail.tvSumber.text.toString())
+        }
+        binding.icdBottomDetail.lrDampak.setOnClickListener {
+            moveToWeb(getString(R.string.url_wikipedia))
+        }
+
+    }
+
+    private fun moveToWeb(url: String) {
+        val moveWeb = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(moveWeb)
+    }
+
     private fun showMarker(location: String) {
 //        val latLong = LatLng(-6.8957643, 107.6338462)
         val latLong = LatLng(ParsingDataCoordinateToLatLong.parsing(location))
@@ -112,7 +148,7 @@ class DetailgmpActivity : AppCompatActivity() {
                 .withDraggable(false)
 
         )
-        mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLong, 8.0))
+        mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLong, 5.0))
 
     }
 
