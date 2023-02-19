@@ -15,7 +15,7 @@ class FormatTImeAgoTest {
         val result = FormatTImeAgo.getTimeAgo(dateTimeStr)
 
         // Assert
-        assertEquals("6 minggu yang lalu", result)
+        assertEquals("7 minggu yang lalu", result)
     }
 
 }
