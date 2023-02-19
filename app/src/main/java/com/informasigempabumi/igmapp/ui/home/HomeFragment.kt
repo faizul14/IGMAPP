@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -91,22 +92,30 @@ class HomeFragment : Fragment() {
                     BitmapFactory.decodeResource(resources, R.drawable.ic_gempa_marker)
                 )
 
-                dataGempa.coordinates?.let { showMarker(it) }
+//                dataGempa.coordinates?.let { showMarker(it) }
+                dataGempa.coordinates?.let { dataGempa.wilayah?.let { it1 -> showMarker(it, it1) } }
             }
         }
     }
 
-    private fun showMarker(location: String) {
+    private fun showMarker(location: String, wilayah: String) {
         val latLong = LatLng(ParsingDataCoordinateToLatLong.parsing(location))
         symbolManager.create(
             SymbolOptions().withLatLng(LatLng(latLong.latitude, latLong.longitude))
                 .withIconImage(DetailgmpActivity.ID).withIconSize(1.0f)
                 .withIconOffset(arrayOf(0f, -1.5f))
-                .withTextField("Location $location").withTextHaloColor("rgba(255, 255, 255, 100)")
+                .withTextField("Loksasi $wilayah").withTextHaloColor("rgba(255, 255, 255, 100)")
                 .withTextHaloWidth(5.0f).withTextAnchor("top").withTextOffset(arrayOf(0f, 2.5f))
                 .withDraggable(false)
 
         )
+        symbolManager.addClickListener { symbol ->
+            if (symbol.iconImage == DetailgmpActivity.ID) {
+                // Tambahkan aksi yang ingin dilakukan ketika marker di klik di sini
+                // Contoh:
+                Toast.makeText(requireContext(), "Marker di-klik!", Toast.LENGTH_SHORT).show()
+            }
+        }
         mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLong, 6.0))
 
     }

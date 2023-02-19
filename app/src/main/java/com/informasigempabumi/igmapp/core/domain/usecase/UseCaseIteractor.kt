@@ -16,4 +16,8 @@ class UseCaseIteractor(private val repository: IGetDataGempaRespository): UseCas
     override fun getGempaDiRasakan(): LiveData<List<DataGempa>> {
         return repository.getGempaDiRasakan()
     }
+
+    override fun getDataCombine(): LiveData<List<DataGempa>> {
+        return repository.getDataCombine()
+    }
 }

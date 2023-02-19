@@ -7,4 +7,5 @@ interface IGetDataGempaRespository {
     fun getGempaTerbaru() : LiveData<DataGempa>
     fun getGempaTerkini() : LiveData<List<DataGempa>>
     fun getGempaDiRasakan() : LiveData<List<DataGempa>>
+    fun getDataCombine() : LiveData<List<DataGempa>>
 }
