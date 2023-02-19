@@ -109,13 +109,6 @@ class HomeFragment : Fragment() {
                 .withDraggable(false)
 
         )
-        symbolManager.addClickListener { symbol ->
-            if (symbol.iconImage == DetailgmpActivity.ID) {
-                // Tambahkan aksi yang ingin dilakukan ketika marker di klik di sini
-                // Contoh:
-                Toast.makeText(requireContext(), "Marker di-klik!", Toast.LENGTH_SHORT).show()
-            }
-        }
         mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLong, 6.0))
 
     }
