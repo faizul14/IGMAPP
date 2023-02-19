@@ -36,4 +36,5 @@
     <string name="sumber0">https://www.bmkg.go.id/gempabumi/gempabumi-terkini.bmkg</string>
     <string name="sumber1">https://www.bmkg.go.id/gempabumi/gempabumi-dirasakan.bmkg</string>
     <string name="url_wikipedia">https://id.wikipedia.org/wiki/Skala_Richter#:~:text=Skala%20Richter%20atau%20SR%20didefinisikan,100%20km%20dari%20pusat%20gempanya.</string>
+    <string name="maps">Maps</string>
 </resources>

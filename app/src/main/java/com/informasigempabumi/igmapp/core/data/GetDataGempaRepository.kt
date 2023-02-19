@@ -26,6 +26,12 @@ class GetDataGempaRepository(private val remoteDataSource: RemoteDataSource): IG
         }
     }
 
+    override fun getDataCombine(): LiveData<List<DataGempa>> {
+        return Transformations.map(remoteDataSource.getDataCombine()){
+            DataMapper.DataResponseToModel(it)
+        }
+    }
+
     companion object{
         @Volatile
         private var INSTANCE: GetDataGempaRepository? = null
