@@ -17,6 +17,7 @@ class FormatTImeAgoTest {
         // Assert
         assertEquals("7 minggu yang lalu", result)
         assertEquals("7 minggu yang lalu", result)
+        assertEquals("7 minggu yang lalu", result)
     }
 
 }
