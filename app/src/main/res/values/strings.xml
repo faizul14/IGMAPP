@@ -1,3 +1,40 @@
 <resources>
     <string name="app_name">IGMAPP</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="list_gempa">List Gempa</string>
+    <string name="tab_text_1">Terkini</string>
+    <string name="tab_text_2">DiRasakan</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sample_magnitudo">2.6 SR</string>
+    <string name="key_mapbox">sk.eyJ1IjoibmVhcmJ5ZG9jIiwiYSI6ImNsM3N3dmw4eDAzYTEzanFxODF1MnZ1cnAifQ.LvoNzo_pvDd7DhfGZFCpDg</string>
+    <string name="sample_list_wilayah">150 km Barat KAB-BLITAR-JABAR</string>
+    <string name="jam_yang_lalu_sample">9 jam yang lalu</string>
+    <string name="jam_sample">06:05:05 WIB</string>
+    <string name="sample_dirasakan">II Pulau Kalaotoa, II Pulau Madu</string>
+    <string name="sample_pusat">Pusat gempa berada di laut 128 km BaratLaut Maumere-Sikka</string>
+    <string name="sample_kedalaman">13 km</string>
+    <string name="sample_potensi">Gempa ini dirasakan untuk diteruskan pada masyarakat</string>
+    <string name="sample_dampak_mag">Dampak diketahui dari bergetarnya perabot dalam ruangan, suara gaduh dan bergetar. Kerusakan tidak terlalu signifikan</string>
+    <string name="sumber">https://www.bmkg.go.id/gempabumi/</string>
+    <!--    unutk dampak magnitudo-->
+    <string name="above_0_below_2">Gempa kecil, tidak terasa</string>
+    <string name="above_2_below_29">Tidak terasa, tetapi terekam oleh alat</string>
+    <string name="above_3_below_39">Seringkali terasa, tetapi jarang menimbulkan kerusakan</string>
+    <string name="above_4_below_49">Dapat diketahui dari bergetarnya perabot dalam ruangan, suara gaduh bergetar. Kerusakan tidak terlalu signifikan.</string>
+    <string name="above_5_below_59">Dapat menyebabkan kerusakan besar pada bangunan pada area yang kecil. Umumnya kerusakan kecil pada bangunan yang didesain dengan baik</string>
+    <string name="above_6_below_69">Dapat merusak area hingga jarak sekitar 160 km</string>
+    <string name="above_7_below_79">Dapat menyebabkan kerusakan serius dalam area lebih luas</string>
+    <string name="above_8_below_89">Dapat menyebabkan kerusakan serius hingga dalam area ratusan mil</string>
+    <string name="above_9_below_99">Menghancurkan area ribuan mil</string>
+    <string name="above_10_below_19">Terasa dan dapat menghancurkan sebuah benua</string>
+    <string name="above_11_below_119">Dapat terasa di separuh sisi bumi. Biasanya hanya terjadi akibat tumbukan meteorit raksasa. Biasanya disertai dengan gemuruh. Contohnya tumbukan meteorit di teluk Chesepeak.</string>
+    <string name="above_12_below_129">Bisa terasa di seluruh dunia. Hanya terekam sekali, saat tumbukan meteorit di semenanjung Yucatan, 65 juta tahun yang lalu yang membentuk kawah Chicxulub</string>
+    <string name="over_13">Belum pernah terekam</string>
+    <string name="sumber0">https://www.bmkg.go.id/gempabumi/gempabumi-terkini.bmkg</string>
+    <string name="sumber1">https://www.bmkg.go.id/gempabumi/gempabumi-dirasakan.bmkg</string>
+    <string name="url_wikipedia">https://id.wikipedia.org/wiki/Skala_Richter#:~:text=Skala%20Richter%20atau%20SR%20didefinisikan,100%20km%20dari%20pusat%20gempanya.</string>
+    <string name="maps">Maps</string>
 </resources>

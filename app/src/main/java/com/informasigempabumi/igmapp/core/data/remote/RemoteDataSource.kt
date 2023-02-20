@@ -3,14 +3,19 @@ package com.informasigempabumi.igmapp.core.data.remote
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import com.informasigempabumi.igmapp.core.data.remote.network.ApiService
 import com.informasigempabumi.igmapp.core.data.remote.response.GempaDiRasakanResponse
 import com.informasigempabumi.igmapp.core.data.remote.response.GempaItem
 import com.informasigempabumi.igmapp.core.data.remote.response.GempaTerbaruResponse
 import com.informasigempabumi.igmapp.core.data.remote.response.GempaTerkiniResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
+
 
 class RemoteDataSource private constructor(private val apiService: ApiService) {
 
@@ -21,12 +26,11 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
         val client = apiService.getGempaTerbaru()
         client.enqueue(object : Callback<GempaTerbaruResponse> {
             override fun onResponse(
-                call: Call<GempaTerbaruResponse>,
-                response: Response<GempaTerbaruResponse>
+                call: Call<GempaTerbaruResponse>, response: Response<GempaTerbaruResponse>
             ) {
                 val responseBody = response.body()
                 if (response.isSuccessful && responseBody != null) {
-                    resultData.value = response.body()!!.infogempa?.gempa
+                    resultData.value = response.body()!!.infogempa?.gempa!!
                 } else {
                     Log.d(TAG, "MESSAGE: ${response.message()}")
                 }
@@ -46,8 +50,7 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
         val client = apiService.getGempaTerkini()
         client.enqueue(object : Callback<GempaTerkiniResponse> {
             override fun onResponse(
-                call: Call<GempaTerkiniResponse>,
-                response: Response<GempaTerkiniResponse>
+                call: Call<GempaTerkiniResponse>, response: Response<GempaTerkiniResponse>
             ) {
                 val responseBody = response.body()
                 if (response.isSuccessful && responseBody != null) {
@@ -71,8 +74,7 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
         val client = apiService.getGempaDiRasakan()
         client.enqueue(object : Callback<GempaDiRasakanResponse> {
             override fun onResponse(
-                call: Call<GempaDiRasakanResponse>,
-                response: Response<GempaDiRasakanResponse>
+                call: Call<GempaDiRasakanResponse>, response: Response<GempaDiRasakanResponse>
             ) {
                 val responseBody = response.body()
                 if (response.isSuccessful && responseBody != null) {
@@ -90,16 +92,49 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
         return resultData
     }
 
+
+    fun getDataCombine(): LiveData<List<GempaItem>> = liveData {
+        val listData = mutableListOf<GempaItem>()
+
+        // Mengambil data dari API GempaTerkini
+        val gempaTerkiniResponse = withContext(Dispatchers.IO) {
+            apiService.getGempaTerkini().execute()
+        }
+
+        if (gempaTerkiniResponse.isSuccessful) {
+            gempaTerkiniResponse.body()?.let { response ->
+                response.infogempa?.gempa?.let { listData.addAll(it.filterNotNull()) }
+            }
+        } else {
+            Log.e(TAG, "Failed to get data from GempaTerkini API. Message: ${gempaTerkiniResponse.message()}")
+        }
+
+        // Mengambil data dari API GempaDiRasakan
+        val gempaDiRasakanResponse = withContext(Dispatchers.IO) {
+            apiService.getGempaDiRasakan().execute()
+        }
+
+        if (gempaDiRasakanResponse.isSuccessful) {
+            gempaDiRasakanResponse.body()?.let { response ->
+                response.infogempa?.gempa?.let { listData.addAll(it.filterNotNull()) }
+            }
+        } else {
+            Log.e(TAG, "Failed to get data from GempaDiRasakan API. Message: ${gempaDiRasakanResponse.message()}")
+        }
+
+        emit(listData)
+    }
+
+
     companion object {
         const val TAG = "RemoteDataSource"
 
         @Volatile
         private var INSTANCE: RemoteDataSource? = null
 
-        fun getInstance(service: ApiService): RemoteDataSource =
-            INSTANCE ?: synchronized(this) {
-                INSTANCE ?: RemoteDataSource(service)
-            }
+        fun getInstance(service: ApiService): RemoteDataSource = INSTANCE ?: synchronized(this) {
+            INSTANCE ?: RemoteDataSource(service)
+        }
     }
 
 }
