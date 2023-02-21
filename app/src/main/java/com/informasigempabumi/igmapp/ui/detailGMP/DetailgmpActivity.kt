@@ -129,6 +129,9 @@ class DetailgmpActivity : AppCompatActivity() {
         binding.icdBottomDetail.lrDampak.setOnClickListener {
             moveToWeb(getString(R.string.url_wikipedia))
         }
+        binding.btnBack.setOnClickListener {
+            super.onBackPressed()
+        }
 
     }
 
