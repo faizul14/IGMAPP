@@ -2,8 +2,8 @@ package com.informasigempabumi.igmapp.ui.shakemap
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.informasigempabumi.igmapp.BuildConfig
 import com.informasigempabumi.igmapp.databinding.ActivityShakeMapBinding
 
 class ShakeMapActivity : AppCompatActivity() {
@@ -21,7 +21,7 @@ class ShakeMapActivity : AppCompatActivity() {
     private fun display(){
         binding.apply {
             Glide.with(this@ShakeMapActivity)
-                .load("https://data.bmkg.go.id/DataMKG/TEWS/20230221031349.mmi.jpg")
+                .load(BuildConfig.BASE_URL+dataShake)
                 .into(tivShakeMap)
         }
 
