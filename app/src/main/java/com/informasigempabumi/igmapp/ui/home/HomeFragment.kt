@@ -75,11 +75,11 @@ class HomeFragment : Fragment() {
                     )
                 }
             }
-            tvTglJam.setText("${dataGempa.tanggal}\n${dataGempa.jam}")
-            tvPusatGempa.setText(dataGempa.wilayah)
-            tvDirasakan.setText(dataGempa.dirasakan)
-            tvDetailKedalaman.setText(dataGempa.kedalaman)
-            tvPotensi.setText(dataGempa.potensi)
+            tvTglJam.text = "${dataGempa.tanggal}\n${dataGempa.jam}"
+            tvPusatGempa.text = dataGempa.wilayah
+            tvDirasakan.text = dataGempa.dirasakan
+            tvDetailKedalaman.text = dataGempa.kedalaman
+            tvPotensi.text = dataGempa.potensi
 
             //forToShakeMap
             btnToShakemap.setOnClickListener {
