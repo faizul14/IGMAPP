@@ -1,5 +1,6 @@
 package com.informasigempabumi.igmapp.ui.home
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.informasigempabumi.igmapp.core.utils.ParsingDataCoordinateToLatLong
 import com.informasigempabumi.igmapp.core.utils.ViewModelFactory
 import com.informasigempabumi.igmapp.databinding.FragmentHomeBinding
 import com.informasigempabumi.igmapp.ui.detailGMP.DetailgmpActivity
+import com.informasigempabumi.igmapp.ui.shakemap.ShakeMapActivity
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapView
@@ -73,11 +75,16 @@ class HomeFragment : Fragment() {
                     )
                 }
             }
-            tvTglJam.setText("${dataGempa.tanggal}\n${dataGempa.jam}")
-            tvPusatGempa.setText(dataGempa.wilayah)
-            tvDirasakan.setText(dataGempa.dirasakan)
-            tvDetailKedalaman.setText(dataGempa.kedalaman)
-            tvPotensi.setText(dataGempa.potensi)
+            tvTglJam.text = "${dataGempa.tanggal}\n${dataGempa.jam}"
+            tvPusatGempa.text = dataGempa.wilayah
+            tvDirasakan.text = dataGempa.dirasakan
+            tvDetailKedalaman.text = dataGempa.kedalaman
+            tvPotensi.text = dataGempa.potensi
+
+            //forToShakeMap
+            btnToShakemap.setOnClickListener {
+                dataGempa.shakemap?.let { it1 -> moveToShakeMap(it1) }
+            }
         }
 
         //set MapBox
@@ -116,8 +123,14 @@ class HomeFragment : Fragment() {
                 Toast.makeText(requireContext(), "Marker di-klik!", Toast.LENGTH_SHORT).show()
             }
         }
-        mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLong, 6.0))
+        mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLong, 5.0))
 
+    }
+
+    private fun moveToShakeMap(idShakeMap: String){
+        val move = Intent(requireActivity(), ShakeMapActivity::class.java)
+        move.putExtra(ShakeMapActivity.EXTRA_LINK_SHAKEMAP, idShakeMap)
+        startActivity(move)
     }
 
     override fun onStart() {
