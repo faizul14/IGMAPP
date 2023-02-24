@@ -1,7 +1,7 @@
 package com.informasigempabumi.igmapp.ui.shakemap
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.informasigempabumi.igmapp.BuildConfig
 import com.informasigempabumi.igmapp.databinding.ActivityShakeMapBinding
@@ -18,10 +18,9 @@ class ShakeMapActivity : AppCompatActivity() {
         display()
     }
 
-    private fun display(){
+    private fun display() {
         binding.apply {
-            Glide.with(this@ShakeMapActivity)
-                .load(BuildConfig.BASE_URL+dataShake)
+            Glide.with(this@ShakeMapActivity).load(BuildConfig.BASE_URL + dataShake)
                 .into(tivShakeMap)
         }
 
@@ -30,7 +29,7 @@ class ShakeMapActivity : AppCompatActivity() {
         }
     }
 
-    companion object{
+    companion object {
         const val EXTRA_LINK_SHAKEMAP = "extra_link_shakemap"
     }
 }
