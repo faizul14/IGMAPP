@@ -9,12 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.informasigempabumi.igmapp.R
 import com.informasigempabumi.igmapp.core.domain.model.DataGempa
 import com.informasigempabumi.igmapp.core.utils.GetStyleMap
 import com.informasigempabumi.igmapp.core.utils.ParsingDataCoordinateToLatLong
-import com.informasigempabumi.igmapp.core.utils.ViewModelFactory
 import com.informasigempabumi.igmapp.databinding.FragmentHomeBinding
 import com.informasigempabumi.igmapp.ui.detailGMP.DetailgmpActivity
 import com.informasigempabumi.igmapp.ui.shakemap.ShakeMapActivity
@@ -22,9 +20,9 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
-import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
@@ -33,16 +31,11 @@ class HomeFragment : Fragment() {
     private lateinit var mapView: MapView
     private lateinit var mapboxMap: MapboxMap
     private lateinit var symbolManager: SymbolManager
+    private val homeViewModel: HomeViewModel by viewModel()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val factory = ViewModelFactory.getInstance()
-        val homeViewModel =
-            ViewModelProvider(requireActivity(), factory).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -111,10 +104,9 @@ class HomeFragment : Fragment() {
         symbolManager.create(
             SymbolOptions().withLatLng(LatLng(latLong.latitude, latLong.longitude))
                 .withIconImage(DetailgmpActivity.ID).withIconSize(1.0f)
-                .withIconOffset(arrayOf(0f, -1.5f))
-                .withTextField("Loksasi $wilayah").withTextHaloColor("rgba(255, 255, 255, 100)")
-                .withTextHaloWidth(5.0f).withTextAnchor("top").withTextOffset(arrayOf(0f, 2.5f))
-                .withDraggable(false)
+                .withIconOffset(arrayOf(0f, -1.5f)).withTextField("Loksasi $wilayah")
+                .withTextHaloColor("rgba(255, 255, 255, 100)").withTextHaloWidth(5.0f)
+                .withTextAnchor("top").withTextOffset(arrayOf(0f, 2.5f)).withDraggable(false)
 
         )
         symbolManager.addClickListener { symbol ->
@@ -128,7 +120,7 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun moveToShakeMap(idShakeMap: String){
+    private fun moveToShakeMap(idShakeMap: String) {
         val move = Intent(requireActivity(), ShakeMapActivity::class.java)
         move.putExtra(ShakeMapActivity.EXTRA_LINK_SHAKEMAP, idShakeMap)
         startActivity(move)

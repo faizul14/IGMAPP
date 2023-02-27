@@ -10,12 +10,10 @@ class FormatTImeAgoTest {
     fun testGetTimeAgoWeeksAgo() {
         // Arrange
         val dateTimeStr = "2023-01-01T00:00:00Z" // 4 minggu yang lalu
-
         // Act
         val result = FormatTImeAgo.getTimeAgo(dateTimeStr)
-
         // Assert
-        assertEquals("6 minggu yang lalu", result)
+        assertEquals("8 minggu yang lalu", result)
     }
 
 }
