@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/titlemap">
+
+        <ListPreference
+            app:defaultValue="@string/pref_map_entry_streets"
+            app:entries="@array/pref_map_label"
+            app:entryValues="@array/pref_map_entry"
+            app:icon="@drawable/ic_maps"
+            app:key="@string/pref_key_map_style"
+            app:title="@string/pref_map_style_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

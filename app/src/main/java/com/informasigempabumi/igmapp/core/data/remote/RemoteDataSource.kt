@@ -16,8 +16,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-
-class RemoteDataSource private constructor(private val apiService: ApiService) {
+class RemoteDataSource(private val apiService: ApiService) {
 
     fun getGempaTerbaru(): LiveData<GempaItem> {
         val resultData = MutableLiveData<GempaItem>()
@@ -106,7 +105,10 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
                 response.infogempa?.gempa?.let { listData.addAll(it.filterNotNull()) }
             }
         } else {
-            Log.e(TAG, "Failed to get data from GempaTerkini API. Message: ${gempaTerkiniResponse.message()}")
+            Log.e(
+                TAG,
+                "Failed to get data from GempaTerkini API. Message: ${gempaTerkiniResponse.message()}"
+            )
         }
 
         // Mengambil data dari API GempaDiRasakan
@@ -119,7 +121,10 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
                 response.infogempa?.gempa?.let { listData.addAll(it.filterNotNull()) }
             }
         } else {
-            Log.e(TAG, "Failed to get data from GempaDiRasakan API. Message: ${gempaDiRasakanResponse.message()}")
+            Log.e(
+                TAG,
+                "Failed to get data from GempaDiRasakan API. Message: ${gempaDiRasakanResponse.message()}"
+            )
         }
 
         emit(listData)
@@ -128,13 +133,6 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
 
     companion object {
         const val TAG = "RemoteDataSource"
-
-        @Volatile
-        private var INSTANCE: RemoteDataSource? = null
-
-        fun getInstance(service: ApiService): RemoteDataSource = INSTANCE ?: synchronized(this) {
-            INSTANCE ?: RemoteDataSource(service)
-        }
     }
 
 }

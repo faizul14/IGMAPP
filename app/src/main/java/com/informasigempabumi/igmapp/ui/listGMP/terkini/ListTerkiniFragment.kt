@@ -5,27 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.informasigempabumi.igmapp.core.ui.ListTerkiniAdapter
-import com.informasigempabumi.igmapp.core.utils.ViewModelFactory
 import com.informasigempabumi.igmapp.databinding.FragmentListTerkiniBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class ListTerkiniFragment : Fragment() {
 
     private var _binding: FragmentListTerkiniBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: ListTerkiniViewModel
     private lateinit var adapter: ListTerkiniAdapter
+    private val viewModel: ListTerkiniViewModel by viewModel()
+
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val factory = ViewModelFactory.getInstance()
-        viewModel =
-            ViewModelProvider(requireActivity(), factory).get(ListTerkiniViewModel::class.java)
-
         _binding = FragmentListTerkiniBinding.inflate(inflater, container, false)
         val root: View = binding.root
         // Inflate the layout for this fragment

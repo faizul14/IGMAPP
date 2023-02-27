@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import com.informasigempabumi.igmapp.R
 import com.informasigempabumi.igmapp.core.domain.model.DataGempa
 import com.informasigempabumi.igmapp.core.utils.FormatStyleWilayah
+import com.informasigempabumi.igmapp.core.utils.GetStyleMap
 import com.informasigempabumi.igmapp.core.utils.ParsingDataCoordinateToLatLong
 import com.informasigempabumi.igmapp.core.utils.Resultmagnitudeimpact
 import com.informasigempabumi.igmapp.databinding.ActivityDetailgmpBinding
@@ -16,7 +17,6 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
-import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
 
@@ -109,7 +109,7 @@ class DetailgmpActivity : AppCompatActivity() {
         //set mapbox
         mapView.getMapAsync { mapboxMap ->
             this.mapboxMap = mapboxMap
-            mapboxMap.setStyle(Style.MAPBOX_STREETS) { style ->
+            mapboxMap.setStyle(GetStyleMap.getPreferenceMapStyle(this.applicationContext)) { style ->
                 symbolManager = SymbolManager(mapView, mapboxMap, style)
                 symbolManager.iconAllowOverlap = true
 
