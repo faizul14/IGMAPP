@@ -6,15 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.informasigempabumi.igmapp.R
 import com.informasigempabumi.igmapp.core.domain.model.DataGempa
 import com.informasigempabumi.igmapp.core.utils.GetStyleMap
-import com.informasigempabumi.igmapp.core.utils.ViewModelFactory
 import com.informasigempabumi.igmapp.databinding.FragmentMapsBinding
-import com.informasigempabumi.igmapp.ui.detailGMP.DetailgmpActivity
 import com.mapbox.geojson.Feature
 import com.mapbox.geojson.FeatureCollection
 import com.mapbox.geojson.Point
@@ -24,11 +20,11 @@ import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.geometry.LatLngBounds
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
-import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class MapsFragment : Fragment() {
@@ -37,13 +33,11 @@ class MapsFragment : Fragment() {
     private lateinit var mapView: MapView
     private lateinit var mapboxMap: MapboxMap
     private lateinit var symbolManager: SymbolManager
+    private val viewModel: MapsViewodel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val factory = ViewModelFactory.getInstance()
-        val viewModel = ViewModelProvider(requireActivity(), factory).get(MapsViewodel::class.java)
-
         _binding = FragmentMapsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -113,8 +107,6 @@ class MapsFragment : Fragment() {
                     Log.d("Mapbox", "Marker clicked at lat=$lat, lon=$lon")
                     true
                 }
-
-
 
 
                 val sourceId = "source-id"
