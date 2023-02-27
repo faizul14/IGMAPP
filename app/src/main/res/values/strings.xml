@@ -39,4 +39,49 @@
     <string name="maps">Maps</string>
     <string name="tittle_setting">Setting</string>
     <string name="pergi_melihat_shakemap">PERGI MELIHAT SHAKEMAP</string>
+
+    <string name="pref_map_label_streets">Streets</string>
+    <string name="pref_map_label_outdoors">Outdoors</string>
+    <string name="pref_map_label_satellite">Satellite</string>
+    <string name="pref_map_label_satellite_streets">Satellite Streets</string>
+    <string name="pref_map_label_light">Light</string>
+    <string name="pref_map_label_dark">Dark</string>
+    <string name="pref_map_label_traffic_day">Traffic Day</string>
+    <string name="pref_map_label_traffic_night">Traffic Night</string>
+
+    <string name="pref_map_entry_streets">MAPBOX_STREETS</string>
+    <string name="pref_map_entry_outdoors">OUTDOORS</string>
+    <string name="pref_map_entry_satellite">SATELLITE</string>
+    <string name="pref_map_entry_satellite_streets">SATELLITE_STREETS</string>
+    <string name="pref_map_entry_light">LIGHT</string>
+    <string name="pref_map_entry_dark">DARK</string>
+    <string name="pref_map_entry_traffic_day">TRAFFIC_DAY</string>
+    <string name="pref_map_entry_traffic_night">TRAFFIC_NIGHT</string>
+
+    <string-array name="pref_map_label">
+        <item>@string/pref_map_label_streets</item>
+        <item>@string/pref_map_label_outdoors</item>
+        <item>@string/pref_map_label_satellite</item>
+        <item>@string/pref_map_label_satellite_streets</item>
+        <item>@string/pref_map_label_light</item>
+        <item>@string/pref_map_label_dark</item>
+        <item>@string/pref_map_label_traffic_day</item>
+        <item>@string/pref_map_label_traffic_night</item>
+    </string-array>
+
+    <string-array name="pref_map_entry">
+        <item>@string/pref_map_entry_streets</item>
+        <item>@string/pref_map_entry_outdoors</item>
+        <item>@string/pref_map_entry_satellite</item>
+        <item>@string/pref_map_entry_satellite_streets</item>
+        <item>@string/pref_map_entry_light</item>
+        <item>@string/pref_map_entry_dark</item>
+        <item>@string/pref_map_entry_traffic_day</item>
+        <item>@string/pref_map_entry_traffic_night</item>
+    </string-array>
+
+    <string name="pref_key_map_style">pref_key_map_style</string>
+    <string name="pref_map_style_title">Gaya Peta</string>
+    <string name="titlemap">Map</string>
+
 </resources>
