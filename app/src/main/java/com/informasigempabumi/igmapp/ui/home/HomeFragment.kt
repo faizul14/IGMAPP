@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.informasigempabumi.igmapp.R
 import com.informasigempabumi.igmapp.core.domain.model.DataGempa
+import com.informasigempabumi.igmapp.core.utils.GetStyleMap
 import com.informasigempabumi.igmapp.core.utils.ParsingDataCoordinateToLatLong
 import com.informasigempabumi.igmapp.core.utils.ViewModelFactory
 import com.informasigempabumi.igmapp.databinding.FragmentHomeBinding
@@ -90,7 +91,7 @@ class HomeFragment : Fragment() {
         //set MapBox
         mapView.getMapAsync { mapboxMap ->
             this.mapboxMap = mapboxMap
-            mapboxMap.setStyle(Style.MAPBOX_STREETS) { style ->
+            mapboxMap.setStyle(GetStyleMap.getPreferenceMapStyle(requireContext().applicationContext)) { style ->
                 symbolManager = SymbolManager(mapView, mapboxMap, style)
                 symbolManager.iconAllowOverlap = true
 
