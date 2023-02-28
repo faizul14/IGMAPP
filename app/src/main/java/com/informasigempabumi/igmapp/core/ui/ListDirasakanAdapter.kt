@@ -12,6 +12,8 @@ import com.informasigempabumi.igmapp.core.domain.model.DataGempa
 import com.informasigempabumi.igmapp.core.utils.FormatTImeAgo
 import com.informasigempabumi.igmapp.databinding.ItemDirasakanBinding
 import com.informasigempabumi.igmapp.ui.detailGMP.DetailgmpActivity
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
 
 class ListDirasakanAdapter : RecyclerView.Adapter<ListDirasakanAdapter.ViewHolder>() {
     private val listDataGempa = ArrayList<DataGempa>()
@@ -25,10 +27,11 @@ class ListDirasakanAdapter : RecyclerView.Adapter<ListDirasakanAdapter.ViewHolde
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(data: DataGempa) {
             val magnitudo = data.magnitude!!.toDouble()
+            val timeNow = OffsetDateTime.now(ZoneOffset.UTC)
             binding.tvListWilayah.text = data.wilayah
             binding.tvListMagnitudo.text = data.magnitude
             binding.tvListTgl.text = data.tanggal
-            binding.tvListJamYanglalu.text = data.dateTime?.let { FormatTImeAgo.getTimeAgo(it) }
+            binding.tvListJamYanglalu.text = data.dateTime?.let { FormatTImeAgo.getTimeAgo(it, timeNow) }
             if (data.magnitude != null) {
                 when (magnitudo) {
                     in 0.0..4.9 -> {

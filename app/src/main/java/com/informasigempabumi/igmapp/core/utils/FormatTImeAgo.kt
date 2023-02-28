@@ -8,8 +8,7 @@ import java.time.ZoneOffset
 
 object FormatTImeAgo {
     @RequiresApi(Build.VERSION_CODES.O)
-    fun getTimeAgo(dateTimeStr: String): String {
-        val now: OffsetDateTime = OffsetDateTime.now(ZoneOffset.UTC)
+    fun getTimeAgo(dateTimeStr: String, now: OffsetDateTime): String {
         val dateTime: OffsetDateTime = OffsetDateTime.parse(dateTimeStr)
         val duration: Duration = Duration.between(dateTime, now)
 
