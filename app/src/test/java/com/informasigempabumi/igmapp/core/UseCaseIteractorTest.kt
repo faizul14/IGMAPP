@@ -1,10 +1,11 @@
-package com.informasigempabumi.igmapp.core.domain.usecase
+package com.informasigempabumi.igmapp.core
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.informasigempabumi.igmapp.core.domain.model.DataGempa
 import com.informasigempabumi.igmapp.core.domain.repository.IGetDataGempaRespository
+import com.informasigempabumi.igmapp.core.domain.usecase.UseCaseIteractor
 import com.informasigempabumi.igmapp.ui.DataDummy
 import org.junit.Assert.*
 import org.junit.Before
