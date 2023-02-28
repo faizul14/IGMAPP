@@ -1,11 +1,11 @@
-package com.informasigempabumi.igmapp.ui.home
+package com.informasigempabumi.igmapp.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.informasigempabumi.igmapp.core.domain.model.DataGempa
 import com.informasigempabumi.igmapp.core.domain.usecase.UseCaseIteractor
-import com.informasigempabumi.igmapp.ui.DataDummy
+import com.informasigempabumi.igmapp.ui.home.HomeViewModel
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -49,22 +49,5 @@ class HomeViewModelTest {
             viewModel.getGempaLive().removeObserver(observer)
         }
     }
-
-//    @Test
-//    fun `when get DataGempaTerbaru Should Return Expected Value`() {
-//        val observer = Observer<DataGempa> {}
-//        try {
-//            val expectedDataGempa = MutableLiveData<DataGempa>()
-//            expectedDataGempa.value = dataDummy
-//            `when`(useCase.getGempaTerbaru()).thenReturn(expectedDataGempa)
-//
-//            val actualDataGempa = viewModel.getGempaLive().observeForever(observer)
-//
-//            Mockito.verify(useCase).getGempaTerbaru()
-//            Assert.assertEquals(expectedDataGempa.value, actualDataGempa)
-//        } finally {
-//            viewModel.getGempaLive().removeObserver(observer)
-//        }
-//    }
 
 }
