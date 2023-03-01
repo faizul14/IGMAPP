@@ -5,7 +5,7 @@ import com.informasigempabumi.igmapp.R
 
 object Resultmagnitudeimpact {
     fun resultImpact(mag: Double, context: Context): String {
-        var result = ""
+        var result: String? = ""
         when (mag) {
             in 0.0..1.9 -> {
                 result = context.getString(R.string.above_0_below_2)
