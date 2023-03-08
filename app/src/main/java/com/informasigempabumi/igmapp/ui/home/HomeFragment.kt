@@ -53,12 +53,12 @@ class HomeFragment : Fragment() {
         _binding?.include?.apply {
             tvHomeMagnitudo.text = "${dataMag} SR"
             when (dataMag) {
-                in 0.0..4.9 -> {
+                in zero..fournine -> {
                     materialCardView.setBackgroundDrawable(
                         ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_green)
                     )
                 }
-                in 5.0..6.0 -> {
+                in five..six -> {
                     materialCardView.setBackgroundDrawable(
                         ContextCompat.getDrawable(binding.root.context, R.drawable.bg_circle_yellow)
                     )
@@ -164,5 +164,12 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object{
+        const val zero = 0.0
+        const val fournine = 4.9
+        const val five = 5.0
+        const val six = 6.0
     }
 }
